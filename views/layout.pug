@@ -1,0 +1,168 @@
+doctype html
+html(lang='fr')
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1.0')
+    meta(http-equiv='X-UA-Compatible' content='ie=edge')
+    title CONTRAST
+    //- Bootstrap CND
+    link(rel='stylesheet', href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous')
+    //- Fontawesome
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css')
+    //- CSS Custom
+    link(rel='stylesheet', href='/css/style.css')
+    script(defer, src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js')
+    
+
+  //- BODY  
+  body
+    #wrapper
+      //- HEADER
+      header.position-sticky.text-center.py-0.fixed-top.mx-auto
+        nav.navbar.navbar-expand-lg.navbar-dark
+
+          //- TITRE PRINCIPALE
+          li.nav-item.text-center.mx-auto
+            a.navbar-brand(href='/')
+              h2#main-title.text-center.m-0.p-0 C
+                |
+                i.fa.fa-circle-notch
+                | NTRAST
+
+          //- Barre de recherche
+          li.nav-item.text-center.mx-auto.d-inline
+            .form-inline.text-center.flex-nowrap
+              .input-group.text-center.mx-1
+                .input-group-prepend.text-center
+                  i.fas.fa-search.text-center
+              form.text-center.mx-1(method="get")
+                input#searchBar.rounded-pill.form-control.text-center(type='text',placeholder="Rechercher" ,aria-label="Search string")
+
+          //-MESSAGE ALERT
+          li.nav-item.text-center
+            != messages('message', locals)
+            if errors
+              each error, i in errors
+                .text-center(class='alert alert-danger') #{error.msg}
+
+          .mx-auto.rounded
+            button.navbar-toggler.bg-dark(type='button', data-toggle='collapse', data-target='#navbarSupportedContent', aria-controls='navbarSupportedContent', aria-expanded='false', aria-label='Toggle navigation')
+              span.navbar-toggler-icon
+            
+
+          .collapse.navbar-collapse.mx-auto(id='navbarSupportedContent')
+            ul.navbar-nav.mx-auto
+            //- Si l'user connecté
+            if user
+              //- PANIER
+              li.nav-item
+                button.btn.btn-success.mx-1.d-sm-inline-block(type='button' data-toggle='modal' data-target='#cart', title="Voir panier") 
+                  i.fa.fa-shopping-basket 
+                  | 
+                  span.total-count 
+                  | 
+                
+
+              //- USER
+              li.nav-item.dropdown.text-dark
+                a.nav-link.dropdown-toggle.fade-in(href='#' data-toggle='dropdown') 
+                  i.far.fa-user  
+                  |  #{user.username} 
+                  b.caret 
+                ul.dropdown-menu.text-dark
+                  li.nav-item
+                    a.nav-link.text-dark(href='/users/dashboard') Mon compte
+                  li.nav-item
+                    a.nav-link.text-dark(href='#') Messages
+                  hr
+                  li.nav-item
+                    a.nav-link.text-dark(href='#')
+                      |   Paramètres 
+
+                  li.nav-item
+                    a.nav-link.text-dark(href='#' data-toggle='modal' data-target='#logoutModal') 
+                      |   Déconnexion 
+                      i.fas.fa-sign-out-alt
+
+              li.nav-item
+                a.nav-link(href='/articles/add') Poster une Photo 
+                  i.fa.fa-camera-retro
+              
+            //- Si visiteurs / new user
+            else
+              li.nav-item
+                a.nav-link(href='/users/register') Inscription 
+                  i.fas.fa-signature
+              li.nav-item
+                a.nav-link(href='/users/login') Connexion 
+                  i.fas.fa-sign-in-alt
+
+      //- Modal Voir Panier
+      .modal.slide-up-fade-in.text-dark(tabindex='-1' id="cart" role='dialog' aria-labelledby='modalLabel' aria-hidden='true')
+        .modal-dialog.modal-lg(role='document')
+          .modal-content
+            .modal-header
+              h2#modalLabel.modal-title Mon Panier
+              button.close(type='button' data-dismiss='modal' aria-label='Fermer')
+                span(aria-hidden='true') &times;
+
+            .modal-body.text-dark
+              table.show-cart.table
+              div.float-md-right
+                | Prix total: €
+                p.total-cart.text-dark
+
+            .modal-footer
+              button.clear-cart.btn.btn-danger.mx-1.d-sm-inline-block( title="Effacer")
+                | Vider 
+                i.fa.fa-trash-alt
+                
+              button.btn.btn-primary(type='button')  
+                | Payer 
+                i.far.fa-credit-card
+              
+
+              //- PAYPAL
+      
+      //- Modal Deconnexion
+      #logoutModal.modal.fade.text-dark.mx-auto.text-center(tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true')
+        .modal-dialog.mx-md-auto(role='document')
+          .modal-content
+            .modal-header.text-center
+              h4#exampleModalLabel.modal-title Déconnexion 
+              button.close(type='button' data-dismiss='modal' aria-label='Close')
+                span(aria-hidden='true') &times;
+            .modal-body.text-dark Vous êtes sur le point de vous déconnecter
+            .modal-footer
+              button.btn.btn-danger(type='button' data-dismiss='modal') Annuler
+              a.btn.btn-success(href='/users/logout') Confirmer
+
+
+
+      //- MAIN
+      main
+
+        //- CONTENT
+        block content
+      
+      //- FOOTER
+      footer.text-center.fixed-bottom
+        br
+        p.m-0
+          | CONTRAST &copy; par 
+          a(href='./admin') jimmy
+          |  2019
+        p.m-0
+          | 
+          a(href='#') Mentions légales
+          
+          
+          
+
+        
+    
+    script(src='https://code.jquery.com/jquery-3.4.1.js', integrity='sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=', crossorigin='anonymous')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js' integrity='sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1' crossorigin='anonymous')
+    script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js' integrity='sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM' crossorigin='anonymous')
+    script(src='/js/main.js')
+    script(src='/js/cart.js')

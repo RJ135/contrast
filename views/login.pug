@@ -1,0 +1,61 @@
+extends layout
+
+block content
+  .fade-in
+    .container
+      .row
+        .col-sm-9.col-md-7.col-lg-5.mx-auto
+          .card.card-signin.my-5
+            .card-body.bg-dark
+              form.form-signin.text-white(method='POST', action='/users/login')
+                //-csurf
+                input(type="hidden", name="_csrf", value=_csrf)
+
+                .form-label-group.p-1.text-white
+                  h1.mx-1.display-4.text-center Connexion
+
+                //- Connexion avec pseudo et mode de passe
+                .text-center
+                  i.text-white.fas.fa-user.fa-2x
+                .form-label-group.p-1
+                  label.text-white(for="log-username") Pseudo
+                  input#log-username.rounded-pill.form-control.text-white.bg-dark(name='username',type='text',placeholder="Votre pseudo")
+                .form-label-group.p-1
+                  label.text-white(for="log-password") Mot de passe
+                  input#log-password.rounded-pill.form-control.text-white.bg-dark(name='password',type='password',placeholder="****")
+                .text-center.px-2
+                  button.rounded-pill.m-2.btn.btn-md.btn-primary(type='submit',title="Se connecter") Connexion
+                  a.rounded-pill.m-2.btn.btn-md.btn-success.text-white(href="/users/register",title="S'inscrire") Inscription
+
+                //- Inscription avec RS
+                .text-center
+                  .separator.text-white ou 
+                    
+                  .pt-3.mx-2
+                    //- facebook
+                    a.mx-2(href='/auth/facebook', role='button',title="connexion facebook")
+                      i.text-white.fab.fa-facebook.fa-2x.light-blue-text.facebook-iconRs
+                    //- twitter
+                      a.mx-2(href='/auth/twitter', role='button',title="connexion twitter")
+                        i.text-white.fab.fa-twitter.fa-2x.light-blue-text.twitter-iconRs
+                    //- google
+                    a.mx-2(href='/auth/google', role='button',title="connexion google")
+                      i.text-white.fab.fa-google.fa-2x.light-blue-text.google-iconRs
+                    //- instagram  
+                      a.mx-2(href='/auth/instagram', role='button',title="connexion instagram")
+                        i.text-white.fab.fa-instagram.fa-2x.light-blue-text.instagram-iconRs
+                
+                  //- Chartes
+                  p.pt-3.mx-2.text-white
+                    small.font-weight-light
+                      | En continuant, vous acceptez les 
+                      a.charte.text-white(href='#',title="lire CGU") CGU 
+                      | , la 
+                      a.charte.text-white(href='#',title="lire politique confidentialité") politique de confidentialité
+                      | , les 
+                      a.charte.text-white(href='#',title="lire CGV") CGV 
+                      | et l' 
+                      a.charte.text-white(href='#',title="lire utilisation cookie") utilisation de cookies de Contrast.
+
+
+      

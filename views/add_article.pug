@@ -1,0 +1,56 @@
+extends layout
+
+block content
+  .fade-in
+    .container
+      .row
+        .col-sm-9.col-md-7.col-lg-10.mx-auto
+          .card.card-signin.my-5
+            .card-body.bg-dark
+              form.mx-auto.text-white( method='POST', action='/articles/add', enctype='multipart/form-data')
+                //-csurf
+                input(type="hidden", name="_csrf", value=_csrf)
+    
+                .form-label-group.p-1.text-white
+                  h1.mx-1.display-4.text-center Ajouter votre photo
+                .text-center
+                  .separator.text-white
+                    |
+                    i.text-white.fas.fa-camera.fa-2x
+
+                .row
+                  //- Colonne gauche
+                  .col-sm-9.col-md-7.col-lg-5.mx-auto
+                    .form-group.p-1
+                      label.text-white(for='titreAdd') Titre
+                      input#titreAdd.rounded-pill.form-control.text-white.bg-dark(name='title', type='text',required)
+                    .form-group.p-1
+                      label.text-white(for='textareaChars') Description (
+                        small#chars.text-warning.font-weight-bold.text-white 500
+                        |  caractères restants )
+                      textarea#textareaChars.form-control.text-justify.text-white.bg-dark(maxlength='500', name='description', type='text', placeholder='A propos de cette photo ...')
+                    .form-group.p-1.font-weight-bold
+                      .text-white.text-center.p-2(for='prixAdd') Prix *
+                      label.input-group-append
+                        input#prixAdd.rounded-pill.form-control.text-white.bg-dark.text-center(name='price',type='number', min='1',required)
+                        |
+                        p.text-white €
+
+                  //- Colonne droite
+                  .col-sm-9.col-md-7.col-lg-5.mx-auto
+                    .form-group.text-center
+                      label.text-white.form-control-file Importer votre Photo 
+                        |
+                        small ( .jpeg, .jpg, .png )
+                      input#imgInpPreview.rounded-pill.form-control-file.text-white.bg-dark(type='file',name='photo' ,accept='image/png, image/jpeg, image/jpg',required)
+                      img#photoPreview.p-2.text-white(src='#' alt='Aperçu')
+
+                .text-center
+                  .separator.text-white
+                    |
+                    i.text-white.fas.fa-angle-double-down.fa-2x
+
+                .form-group.text-center
+                  button.rounded-pill.m-2.btn.btn-md.btn-success(type='submit',title="Soumettre votre photo") Valider
+                  a.rounded-pill.m-2.btn.btn-md.btn-danger.text-white(href='/',title="Vers Accueil") Annuler 
+                

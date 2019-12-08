@@ -1,0 +1,55 @@
+extends layout
+
+block content
+  .text-focus-in
+    h2.mx-1.display-4.text-center #{article.title}
+    .container.fade-in
+      hr.border-white
+      .row
+        
+        .col-sm-9.col-md-7.col-lg-5.mx-auto
+          
+          .row.d-flex.justify-content-between.align-items-center
+            a.rounded-pill.btn.btn-light.text-dark(href="/",title="Retour galerie") 
+              i.fas.fa-angle-double-left
+
+            .display-4 #{article.price} € 
+            //- User
+            if user
+              //-Actions CLIENT
+              if user.id !== author.id
+                //- PRIX & ACHAT
+                a.rounded-pill.btn.btn-success.text-white.add-to-cart(href="#" data-name=article.title data-price=article.price type ='button',title="Acheter")
+                  .font-weight-700.font-weight-bold #{article.price} € 
+                    i.fas.fa-cart-plus
+                button.rounded-pill.btn.btn-warning.text-white.float-right(type ='button',title="Signaler")  
+                  i.fas.fa-exclamation-triangle
+
+            //- Actions AUTHOR
+            if user
+              if user.id == author.id
+                a.rounded-pill.btn.btn-primary.text-white(href='/articles/edit/'+ article._id,title="Editer cet article")    
+                  i.fas.fa-wrench
+                a.rounded-pill.btn.btn-danger.text-white.delete-article.float-right(href='#', data-id=article._id,title="Supprimer cet article")
+                  i.fas.fa-trash
+
+          //- Author
+          p par
+            |
+            a.text-uppercase.rounded-pill.btn.btn-dark(href="#")  #{author.username}
+          
+          //- Description
+          p=article.description
+
+          //- DATES
+          .li
+            p crée le #{moment(article.creatAt).format('DD-MM-YYYY à HH:mm:ss')}
+            p modifier le #{moment(article.modifAt).format('DD-MM-YYYY à HH:mm:ss')}
+
+        //- Colonne droite
+        .col-sm-9.col-md-7.col-lg-5.mx-auto
+          //- PHOTO
+          img.shadow.img-responsive.slide-up-fade-in(src=filePath+article.photo, alt="photo show one")
+          
+          
+

@@ -1,0 +1,155 @@
+extends layout
+
+block content
+    .fade-in
+        .card.container.mx-auto
+
+            .card-title.p-3.m-0.text-center
+                .separator.text-center
+                    |
+                    i.fa.fa-user-tie.fa-3x
+                    h2.display-4 Compte #{user.username}
+                    
+                
+                .card-subtitle
+                    em.small.p-1 inscrit le #{moment(user.creatAt).format('DD-MM-YYYY à HH:mm')}
+                    em.small.p-1 dernière activitée le #{moment(user.modifAt).format('DD-MM-YYYY à HH:mm')}
+
+                //- Réseaux sociaux
+                .pt-3.mx-2
+                .text-center.mx-1
+                    em Suivez moi sur ...  
+                    //- facebook
+                    a.mx-2(href='#', role='button',title="connexion facebook",alt='Facebook')
+                        i.fab.fa-facebook.fa-2x.light-blue-text.facebook-iconRs
+                    //- twitter
+                    a.mx-2(href='#', role='button',title="connexion twitter",alt='Twitter')
+                        i.fab.fa-twitter.fa-2x.light-blue-text.twitter-iconRs
+                    //- google
+                    //-a.mx-2(href='#', role='button',title="connexion google",alt='Google')
+                        i.fab.fa-google.fa-2x.light-blue-text.google-iconRs
+                    //- instagram  
+                    a.mx-2(href='#', role='button',title="connexion instagram",alt='Instagram')
+                        i.fab.fa-instagram.fa-2x.light-blue-text.instagram-iconRs
+                    
+                    //- Behance  
+                    a.mx-2(href='#', role='button',title="portfolio Behance",alt='Behance')
+                        i.fab.fa-behance.fa-2x.light-blue-text.behance-iconRs
+                    //- Dribble  
+                    a.mx-2(href='#', role='button',title="portfolio Dribble",alt='Dribble')
+                        i.fab.fa-dribbble.fa-2x.light-blue-text.dribble-iconRs
+                    //- Ajouter reseau social ou page  
+                    a.mx-2(href='#', role='button',title="portfolio ajouter",alt='Ajouter reseaux')
+                        i.fas.fa-plus.fa-2x.light-blue-text.deviantArt-iconRs
+                
+                //- Champs user modifiable
+                .card-subtitle.m-2
+                    form.p-2(action="", method="post")
+                        //-csurf
+                        input(type="hidden", name="_csrf", value=_csrf)
+                        ul.row.m-0.p-0
+                            li.nav-item.col-4
+                                .form-label-group.text-center
+                                    label(for="register-name")  
+                                        |
+                                        small.font-weight-bold Nom
+                                         
+                                    input.text-center#register-name.border-0.form-control(name='name', type='text', value=user.name)
+                                    
+                            li.nav-item.col-4
+                                .form-label-group.text-center
+                                    label(for="register-username")  
+                                        |
+                                        small.font-weight-bold Pseudo
+                                         
+                                    input.text-center#register-username.border-0.form-control(name='username',type='text', value=user.username)
+                                    
+                            li.nav-item.col-4
+                                .form-label-group.text-center
+                                    label(for="register-email")  
+                                        |
+                                        small.font-weight-bold Email
+                                         
+                                    input.text-center#register-email.border-0.form-control(name='email', type='text', value=user.email)
+
+                    .separator.text-center
+                        |
+                        button.mx-2.text-center.btn-sm.btn.btn-success.rounded-pill.form-group(type="#", title="Valider") Valider modification
+                            i.mx-1.fas.fa-user-edit
+                        a.mx-2.rounded-pill.btn-sm.btn-warning.form-group.text-center(href="/",title="Retour galerie") 
+                            i.mx-1.fas.fa-angle-double-left
+                        
+                                    
+                        
+
+            .card-body
+                .row
+                    //- Colonne de gauche
+                    .col
+                        .separator.text-center
+                            |
+                            h2.font-weight-light A propos
+                        .text-justify
+                            p Chose, de se trouver dans l'imperfection des documents géologiques. Apprends, répondit l'enfant. Intimidé à mesure qu'il entendait monter autour de lui une petite pension du gouvernement. Abattu par une catastrophe ; quelque belle catastrophe, tout imprégnée d'horreur ! Sors donc d'ici avant d'avoir cherché à hâter, autant qu'ils le volaient. Avant-hier soir, j'allai dans ma chambre. Légitime ou non, elle ne jeta même pas un gémissement. Fallait peut-être sauter sur le sable çà et là se durcir en écailles.Entourée de hauts bâtiments, où nous perdons conscience de toutes les provinces de la forêt ne nous aura pas attendues ? Établi marchand mercier, comme son sourire à rester sur les bras de mon père dont je vous ai recommandé, quand même vous me l'annoncez. Donnez-lui ce qu'il impose. 
+                            p Arrange-toi avec lui, la bouche entrouverte et sentit la pointe du couteau. Méfiez-vous de la pente sud de la belle infante s'avança vers lui. Animée d'une volonté faible. Sachant où il était question de payer, je suis perdu...Longuement amarinée, colorée par le soleil qui nous éclaire, je monte et je descends la spirale, le chemin n'est pas complète. Paroles qui me touchent, mais vos ennemis. Aimer avec le coeur languissant. Craignant d'exciter l'hilarité de ses matelots, chants si limpides et si clairs qu'on en avait déjà appris le silence du geste. Reconduisez les prisonniers dans leurs lits ; à commencer par les siennes, avait été emmené par ses hommes et lui pouvaient peindre l'étoile blanche sur mon lourd bouclier. 
+                             
+
+                    //- Colonne de droite
+                    .col.mx-auto
+                        .separator.text-center
+                            |
+                            h2.font-weight-light Albums 
+
+                        .col
+                            .card-img
+                                .imgs-portfolio
+                                    a(href="#", title="album 1", alt="album 1")
+                                        img.p-1(src="https://dummyimage.com/320x320/000000/fff.jpg&text=album 1", alt="album 1")
+                                    a(href="#", title="album 2", alt="album 2")
+                                        img.p-1(src="https://dummyimage.com/320x320/000000/fff.jpg&text=album 2", alt="album 2")
+                                    a(href="#", title="album 3", alt="album 3")
+                                        img.p-1(src="https://dummyimage.com/320x320/000000/fff.jpg&text=album 3", alt="album 3")
+                                    a(href="#", title="album 4", alt="album 4")
+                                        img.p-1(src="https://dummyimage.com/320x320/000000/fff.jpg&text=album 4", alt="album 4")
+                                    a(href="#", title="album 5", alt="album 5")
+                                        img.p-1(src="https://dummyimage.com/320x320/000000/fff.jpg&text=album 5", alt="album 5")
+                                    a(href="#", title="ajouter album", alt="ajouter album")
+                                        img.p-1(src="https://dummyimage.com/320x320/000000/fff.jpg&text=ajouter", alt="ajouter album")
+
+                //- ligne themes préferer
+                .col
+                    .separator.text-center
+                        |
+                        h2.font-weight-light Thèmes
+                    
+                    .col.font-weight-bold
+                        .card-columns.text-center
+                            .card.bg-dark.m-auto.px-1
+                                .card-header.font-weight-bold.text-white
+                                    | Abstrait
+                            .card.bg-dark.m-auto.px-1
+                                .card-header.font-weight-bold.text-white
+                                    | Animaux
+                            .card.bg-dark.m-auto.px-1
+                                .card-header.font-weight-bold.text-white
+                                    | Arts
+                            .card.bg-dark.m-auto.px-1
+                                .card-header.font-weight-bold.text-white
+                                    | Mode
+                            .card.bg-dark.m-auto.px-1
+                                .card-header.font-weight-bold.text-white
+                                    | Intérieurs
+                            .card.bg-dark.m-auto.px-1
+                                .card-header.font-weight-bold.text-white
+                                    | Nature
+                            .card.bg-dark.m-auto.px-1
+                                .card-header.font-weight-bold.text-white
+                                    | Tecnhologie
+                            .card.bg-dark.m-auto.px-1
+                                .card-header.font-weight-bold.text-white
+                                    | Sport
+                            .card.bg-dark.m-auto.px-1
+                                .card-header.font-weight-bold.text-white
+                                    i.fas.fa-plus
+
+

@@ -1,0 +1,37 @@
+extends layout
+
+block content
+  .fade-in
+    h1.mx-1.display-4.text-center Edition 
+    .container-fluid
+      .card-body
+        .col-sm-9.mx-auto
+          form.mx-auto(method='POST', action='/articles/edit/'+article._id)
+          
+            //-csurf
+            input(type="hidden", name="_csrf", value=_csrf)
+
+            .row
+              .col-sm-9.col-md-7.col-lg-5.mx-auto
+                
+                .form-group
+                  label(for='titreEdit') Modifier le titre
+                  input#titreEdit.form-control.border-0.shadow(name='title', type='text', value=article.title)
+                
+                .form-group
+                  label(for='textareaChars') Modifer la description (
+                    small#chars.text-success.font-weight-bold 500 
+                    |  caractères restants )
+                  textarea#textareaChars.form-control.border-0.shadow(maxlength='500', name='description', type='text') #{article.description}
+
+                .form-group
+                  label(for='prixEdit') Modifier le prix *
+                  .input-group-append
+                    input#prixEdit.form-control.border-0.shadow(name='price', type='number', min='1' , value=article.price)
+                    span.input-group-text €
+
+            .form-group.text-sm-center
+              input.mx-3.btn.btn-success(type='submit',value='Confirmer') 
+              a.mx-3.btn.btn-danger(href='/') Annuler
+
+

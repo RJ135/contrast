@@ -1,0 +1,23 @@
+extends layout
+//-index Accueil
+block content
+  .text-focus-in
+    .row.mx-auto
+      .mx-auto.position-relative
+        h1.display-4.text-center.text-focus-in GALERIE
+    section.card-group.align-items-center.px-5
+      each article, i in articles
+        .col-lg-3.col-md-6.col-lg.p-2.text-justify
+          .card.border-0.fade-in-bck
+            .box
+            if article.photo != false
+              img.box_img( src=fileResizedPath+article.photo ,alt='photo article index')
+              .px-2.py-0.card-img-overlay.p-2.contentTextHover
+                .textHover
+                  h4.text-center.px-2.m-0.text-white
+                    a.stretched-link.text-white(href="/articles/"+article._id) #{article.title}
+                  p.text-white #{article.description}
+                  //- author id
+                    p.text-center.text-white par
+                      | 
+                      span.font-weight-bold #{author.username}

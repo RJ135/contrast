@@ -1,0 +1,64 @@
+extends layout
+
+block content
+  .fade-in
+    .container
+      .row
+        .col-sm-9.col-md-7.col-lg-5.mx-auto
+          .card.card-signup.my-5
+            .card-body.bg-dark
+              form.form-signup.text-white(method='POST', action='/users/register')
+
+                //-csurf
+                input(type="hidden", name="_csrf", value=_csrf)
+
+                .form-label-group.text-white.text-center
+                  h1.mx-1.display-4.text-center Inscription
+                  //- button reset
+                    .justify-content-center
+                      button.btn.btn-sm.btn-secondary(type='reset', data-toggle='tooltip', data-placement='top', title='Tout effacer')
+                        i.fa.fa-undo
+
+                //- Input user
+                .text-center
+                  .separator.text-white 
+                    |
+                    i.fas.fa-user.fa-2x
+                .form-label-group.px-sm-5
+                  label.text-white(for="register-name") Nom
+                  input#register-name.rounded-pill.form-control.text-white.bg-dark(name='name', type='text', placeholder='Votre nom')
+                .form-label-group.px-sm-5
+                  label.text-white(for="register-username") Pseudo
+                  input#register-username.rounded-pill.form-control.text-white.bg-dark(name='username',type='text', placeholder='Votre pseudo')
+                .form-label-group.px-sm-5
+                  label.text-white(for="register-email") Email
+                  input#register-email.rounded-pill.form-control.text-white.bg-dark(name='email', type='text', placeholder='***@***.com')
+
+                //- Input mot de passe
+                .text-center
+                  .separator.text-white 
+                    |
+                    i.fas.fa-lock
+                .form-label-group.px-sm-5
+                  label.text-white(for="register-password") Mot de passe
+                  input#register-password.rounded-pill.form-control.text-white.bg-dark(name='password',type='password', placeholder='****' )
+                .form-label-group.px-sm-5
+                  label.text-white(for="register-password2") Confirmez votre mot de passe
+                  input#register-password2.rounded-pill.form-control.text-white.bg-dark(name='password2',type='password', placeholder='****')
+
+                br
+                .text-center
+                  button.rounded-pill.m-2.btn.btn-md.submit-primary.btn-success(type='submit',title="Soumettre") Soumettre
+                  a.rounded-pill.m-2.btn.btn-md.btn-warning.text-white(href='/',title="Retour accueil") Accueil
+                  
+                  //- Chartes
+                  p.pt-3.m-0.text-white
+                    small.font-weight-light
+                      | En continuant, vous acceptez les 
+                      a.charte.text-white.font-weight-bold(href='', target='_blank',title="lire CGU") CGU 
+                      | , la 
+                      a.charte.text-white.font-weight-bold(href='', target='_blank',title="lire politique confidentialité") politique de confidentialité
+                      | , les 
+                      a.charte.text-white.font-weight-bold(href='', target='_blank',title="lire CGV") CGV 
+                      | et l' 
+                      a.charte.text-white.font-weight-bold(href='', target='_blank',title="lire utilisation cookie") utilisation de cookies de Contrast.
