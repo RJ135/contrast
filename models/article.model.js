@@ -13,8 +13,8 @@ const articleSchema = new mongoose.Schema({
   description: { type: String, required :false},
   price: { type: Number, required :true},
   authorized: { type:Boolean, required:true, default:true },
-  creatAt: { type: Date, default:moment().format('DD/MM/YYYY, h:mm:ss')},
-  modifAt: { type: Date, default:moment().format('DD/MM/YYYY, h:mm:ss')}
+  creatAt: { type: Date, default:moment().format('L, HH:mm:ss')},
+  modifAt: { type: Date, default:moment().format('L, HH:mm:ss')}
 })
 
 // Export modele Article

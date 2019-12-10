@@ -12,8 +12,9 @@ block content
                     
                 
                 .card-subtitle
-                    em.small.p-1 inscrit le #{moment(user.creatAt).format('DD-MM-YYYY à HH:mm')}
-                    em.small.p-1 dernière activitée le #{moment(user.modifAt).format('DD-MM-YYYY à HH:mm')}
+                    em.small.p-1 inscrit le #{moment(user.creatAt).format('MM/DD/YYYY à HH:mm:ss')}
+                    em.small.p-1 dernière activitée le #{moment(user.modifAt).format('MM/DD/YYYY à HH:mm:ss')}
+                p=user.name
 
                 //- Réseaux sociaux
                 .pt-3.mx-2
@@ -46,7 +47,8 @@ block content
                 .card-subtitle.m-2
                     form.p-2(action="", method="post")
                         //-csurf
-                        input(type="hidden", name="_csrf", value=_csrf)
+                            input(type="hidden", name="_csrf", value=_csrf)
+
                         ul.row.m-0.p-0
                             li.nav-item.col-4
                                 .form-label-group.text-center

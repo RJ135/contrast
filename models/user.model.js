@@ -1,6 +1,6 @@
 // Import mongoose
 const mongoose = require('mongoose')
-mongoose.set('useCreateIndex', true);
+/* mongoose.set('useCreateIndex', true); */
 const moment = require('moment')
 moment.locale('fr')
 
@@ -12,8 +12,8 @@ const UserSchema = new mongoose.Schema({
   username: { type: String, required: true,unique: true },
   password: { type: String, required: true },
   authorized: { type:Boolean, required:true, default:true },
-  creatAt: { type: Date, default:moment().format('DD/MM/YYYY, h:mm:ss') },
-  modifAt: { type: Date, default:moment().format('DD/MM/YYYY, h:mm:ss') },
+  creatAt: { type: Date, default:moment().format('L, HH:mm:ss') },
+  modifAt: { type: Date, default:moment().format('L, HH:mm:ss') },
   photoUnit : { type : mongoose.Types.ObjectId, required :false, ref :'Article' }
 });
 

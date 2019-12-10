@@ -41,9 +41,11 @@ block content
                     .form-group.text-center
                       label.text-white.form-control-file Importer votre Photo 
                         |
+                        span.text-danger.font-weight-bold < 10 Mo 
+                        |
                         small ( .jpeg, .jpg, .png )
-                      input#imgInpPreview.rounded-pill.form-control-file.text-white.bg-dark(type='file',name='photo' ,accept='image/png, image/jpeg, image/jpg',required)
-                      img#photoPreview.p-2.text-white(src='#' alt='Aperçu')
+                      input#imgInpPreview.form-control-file.text-white.bg-dark(type='file',name='photo' ,accept='image/png, image/jpeg, image/jpg',required)
+                      img#photoPreview.p-2.text-white(src='#' alt='...')
 
                 .text-center
                   .separator.text-white

@@ -27,6 +27,8 @@ router.post('/register', function(req, res){
   const username = req.body.username;
   const password = req.body.password;
   const password2 = req.body.password2;
+  const modifAt = moment(new Date()).format('L, HH:mm:ss');
+  const creatAt = moment(new Date()).format('L, HH:mm:ss');
 
   req.checkBody('name', 'Nom requis').notEmpty();
   req.checkBody('email', 'Email requis').notEmpty();
@@ -53,7 +55,9 @@ router.post('/register', function(req, res){
       name:name,
       email:email,
       username:username,
-      password:password
+      password:password,
+      creatAt:creatAt,
+      modifAt:modifAt
     });
 
     bcrypt.genSalt(10, function(err, salt){
@@ -114,10 +118,10 @@ router.get('/logout', async(req, res)=>{
  */
 // ====Route vers Dashboard/Edition user====
 router.get('/dashboard', async(req, res)=>{
-  article = await Article.find()
+  const user = await User.findById(req.user._id)
   res.render('dashboard',{
-      moment: require('moment'),
-      article : article
+      user : user,
+      moment: require('moment')
     }
   )
 })

@@ -65,6 +65,8 @@ router.post('/add', upload.single('photo'), async(req, res) => {
   article.author = req.user._id;
   article.description = req.body.description;
   article.price = req.body.price;
+  article.creatAt = moment(new Date()).format('L, HH:mm:ss');
+  article.modifAt = article.creatAt;
     
   const width = 640;
   const height = 640;
@@ -122,7 +124,7 @@ router.post('/edit/:id', async(req, res)=>{
     article.author = req.user._id;
     article.description = req.body.description;
     article.price = req.body.price;
-    article.modifAt = moment(new Date()).format('DD/MM/YYYY, h:mm:ss');
+    article.modifAt = moment(new Date()).format('L, HH:mm:ss');
 
     let query = {_id:req.params.id}
 
@@ -156,7 +158,7 @@ router.delete('/:id', (req, res)=>{
     if(article.author != req.user.id){
       res.status(500).send()
     } else {
-      Article.deleteOne(query, (err)=>{
+      Article.remove(query, (err)=>{
         if(err){
           console.log('ERREUR DELETE article :'+err)
         }

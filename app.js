@@ -138,9 +138,9 @@ app.get('/users/register', csrfProtection, function (req, res) {
   res.render('register', { csrfToken: req.csrfToken() })
 })
 // CSRF USERS DASHBOARD
-app.get('/users/dashboard', csrfProtection, function (req, res) {
+/* app.get('/users/dashboard', csrfProtection, function (req, res) {
   res.render('dashboard', { csrfToken: req.csrfToken() })
-})
+}) */
 
 
 // CSRF ARTICLES EDIT
@@ -159,17 +159,18 @@ app.post('/process', parseForm, csrfProtection, function (req, res) {
 
 
 // ====Home Route Async====
-app.get('/', async(req, res) => {
-  let articles
-  try {
-    /* toggle comment to TEST CORS
-    res.json({msg: 'This is CORS-enabled for all origins!'}) */
-    articles = await Article.find().sort({ creatAt: -1 }).exec()
-  } catch {
-    articles = []
-  }
-  res.render('index', { articles: articles })
-})
+app.get('/', function(req, res){
+  Article.find({}, function(err, articles){
+    if(err){
+      console.log(err);
+      res.redirect('/')
+    } else {
+      res.render('index', {
+        articles: articles
+      });
+    }
+  });
+});
 
 // ====Route Files====
 app.use('/articles', articles)
